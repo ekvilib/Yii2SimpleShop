@@ -2,16 +2,18 @@
 
 namespace tests\codeception\unit\models;
 
+use app\models\User;
 use yii\codeception\TestCase;
 
 class UserTest extends TestCase
 {
-    protected function setUp()
-    {
-        parent::setUp();
-        // uncomment the following to load fixtures for user table
-        //$this->loadFixtures(['user']);
-    }
+	public function testCreateUser()
+	{
+		$user = new User();
+		$user->username = 'username';
+		$user->password = 'password';
+		$user->save();
 
-    // TODO add test methods here
+		expect("User should been in database", $user->id)->notNull();
+	}
 }

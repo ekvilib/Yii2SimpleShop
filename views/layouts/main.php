@@ -29,21 +29,34 @@ AppAsset::register($this);
                 'brandLabel' => 'My Company',
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
-                    'class' => 'navbar-inverse navbar-fixed-top',
+                    'class' => 'navbar-inverse',
                 ],
             ]);
+
+	        $items = [
+		        ['label' => 'Home', 'url' => ['/site/index']],
+		        ['label' => 'About', 'url' => ['/site/about']],
+		        ['label' => 'Contact', 'url' => ['/site/contact']],
+		        Yii::$app->user->isGuest ?
+			        ['label' => 'Login', 'url' => ['/site/login']] :
+			        ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+				        'url' => ['/site/logout'],
+				        'linkOptions' => ['data-method' => 'post']],
+	        ];
+
+	        if(!Yii::$app->user->isGuest && Yii::$app->user->identity->is_admin)
+	        {
+		        $items[] = ['label' => 'Edit users', 'url' => ['/admin-user']];
+		        $items[] = ['label' => 'Edit baskets', 'url' => ['/admin-basket-product']];
+		        $items[] = ['label' => 'Edit categories', 'url' => ['/admin-category']];
+		        $items[] = ['label' => 'Edit product', 'url' => ['/admin-product']];
+		        $items[] = ['label' => 'Edit product attributes', 'url' => ['/admin-product-attribute']];
+		        $items[] = ['label' => 'Edit product attributes types', 'url' => ['/admin-product-attribute-type']];
+	        }
+
             echo Nav::widget([
-                'options' => ['class' => 'navbar-nav navbar-right'],
-                'items' => [
-                    ['label' => 'Home', 'url' => ['/site/index']],
-                    ['label' => 'About', 'url' => ['/site/about']],
-                    ['label' => 'Contact', 'url' => ['/site/contact']],
-                    Yii::$app->user->isGuest ?
-                        ['label' => 'Login', 'url' => ['/site/login']] :
-                        ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-                            'url' => ['/site/logout'],
-                            'linkOptions' => ['data-method' => 'post']],
-                ],
+                'options' => ['class' => 'navbar-nav'],
+                'items' => $items,
             ]);
             NavBar::end();
         ?>
