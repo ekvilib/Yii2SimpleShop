@@ -14,7 +14,7 @@ use Yii;
  */
 class ProductAttribute extends \yii\db\ActiveRecord
 {
-    /**
+	/**
      * @inheritdoc
      */
     public static function tableName()
@@ -46,4 +46,9 @@ class ProductAttribute extends \yii\db\ActiveRecord
             'value' => 'Value',
         ];
     }
+
+	public function getType()
+	{
+		return ProductAttributeType::findOne($this->type_id);
+	}
 }

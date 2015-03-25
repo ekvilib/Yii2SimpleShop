@@ -13,6 +13,8 @@ $this->title = 'Category';
 					<h2><?php echo $product->name; ?></h2>
 					<div class="badge badge-inverse">Стоимость: <?php echo $product->price; ?></div>
 					<?php echo $product->description; ?>
+
+					<a class='btn btn-success' href="<?php echo Yii::$app->urlManager->createUrl(['basket/put', 'id' => $product->id]) ; ?>">В корзину</a>
 				</div>
 			</div>
 		</div>

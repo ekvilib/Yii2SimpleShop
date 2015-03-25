@@ -44,4 +44,11 @@ class Category extends \yii\db\ActiveRecord
             'name' => 'Name',
         ];
     }
+
+	public function getSubcategories()
+	{
+		return static::find()
+			->where(['parent_id' => $this->id])
+			->all();
+	}
 }

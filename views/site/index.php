@@ -5,9 +5,11 @@ $this->title = 'My Yii Application';
 <div class="site-index">
 
     <div class="jumbotron">
-        <h1>Shop!</h1>
+	    <div style="height: 200px;">
+		    <h1>Пыщпыщ!</h1>
+	    </div>
 
-        <p class="lead">welcome!</p>
+        <p class="lead">Добро пожаловать в интернет-магазин!</p>
     </div>
 
 	<?php foreach($categories as $category): ?>
@@ -16,12 +18,10 @@ $this->title = 'My Yii Application';
 				<div class="col-md-12">
 					<a href="<?php echo Yii::$app->urlManager->createUrl(['category', 'id' => $category->id]); ?>"><h4><?php echo $category->name; ?></h4></a>
 
-					<?php foreach($categories as $subcategory): ?>
-						<?php if($subcategory->parent_id == $category->id): ?>
-							<div class="">
-								<a href="<?php echo Yii::$app->urlManager->createUrl(['category', 'id' => $category->id]); ?>"><?php echo $category->name; ?></a>
-							</div>
-						<?php endif;?>
+					<?php foreach($category->subcategories as $subcategory): ?>
+						<div class="">
+							<a href="<?php echo Yii::$app->urlManager->createUrl(['category', 'id' => $category->id]); ?>"><?php echo $category->name; ?></a>
+						</div>
 					<?php endforeach; ?>
 
 				</div>

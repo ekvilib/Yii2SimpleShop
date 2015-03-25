@@ -2,6 +2,11 @@
 
 namespace tests\codeception\unit\models;
 
+use app\models\Basket;
+use app\models\BasketProduct;
+use app\models\Product;
+use app\models\User;
+use tests\codeception\unit\fixtures\ProductFixture;
 use Yii;
 use yii\codeception\TestCase;
 use Codeception\Specify;
@@ -12,7 +17,7 @@ class BasketTest extends TestCase
 
 	public function testGetTotal()
 	{
-		$user = User::findByUsername('user');
+		$user = User::findByUsername('demo');
 		$basket = new Basket($user);
 
 		expect("Basket should have total price", $basket->total)->notNull();
@@ -20,7 +25,7 @@ class BasketTest extends TestCase
 
 	public function testGetProducts()
 	{
-		$user = User::findByUsername('user');
+		$user = User::findByUsername('demo');
 		$basket = new Basket($user);
 
 		expect("Basket should have products", $basket->products)->notNull();
@@ -28,14 +33,21 @@ class BasketTest extends TestCase
 
 	public function testAddProductToBasket()
 	{
-		$user = User::findByUsername('user');
+		$user = User::findByUsername('demo');
 		$basket = new Basket($user);
 
-		$basketProduct = new BasketProduct();
-		$basketProduct->user_id = 1;
-		$basketProduct->product_id = 1;
-		$basketProduct->count = 1;
+		$product = Product::findOne(1);
 
-		expect("Basket product should been in database", $basket->addProduct($basketProduct))->true();
+		expect("Basket product should been in database", $basket->addProduct($product))->true();
+	}
+
+	public function fixtures()
+	{
+		return [
+			'user' => [
+				'class' => ProductFixture::className(),
+				'dataFile' => '@tests/codeception/unit/fixtures/data/product.php',
+			],
+		];
 	}
 }
