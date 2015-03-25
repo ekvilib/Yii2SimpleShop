@@ -20,8 +20,8 @@ class Basket extends Model
 	public function getTotal()
 	{
 		$price = 0;
-		foreach ($this->products as $product) {
-			$price = $price + $product->price;
+		foreach ($this->products as $basketProduct) {
+			$price = $price + $basketProduct->product->price;
 		}
 
 		return $price;
