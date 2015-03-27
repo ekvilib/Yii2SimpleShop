@@ -40,8 +40,8 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'parent_id' => 'Parent ID',
-            'name' => 'Name',
+            'parent_id' => 'Родительская категория',
+            'name' => 'Наименование продукта',
         ];
     }
 
@@ -51,4 +51,18 @@ class Category extends \yii\db\ActiveRecord
 			->where(['parent_id' => $this->id])
 			->all();
 	}
+
+    public function getCategories()
+    {
+        return static::find()
+            ->where(['parent_id' => $this->id])
+            ->one();
+    }
+
+    public function getParent()
+    {
+        return self::find()
+            ->where (['id'=> $this->parent_id])
+            -> one()->name;
+    }
 }

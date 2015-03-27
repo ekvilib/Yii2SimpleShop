@@ -42,9 +42,9 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             'id' => 'ID',
-            'is_admin' => 'Is Admin',
-            'username' => 'Username',
-            'password' => 'Password',
+            'is_admin' => 'Уровень доступа',
+            'username' => 'Имя пользователя',
+            'password' => 'Пароль',
         ];
     }
 

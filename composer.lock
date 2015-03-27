@@ -215,7 +215,8 @@
             },
             "license": [
                 "MIT"
-            ]
+            ],
+            "time": "2015-03-08 21:03:11"
         },
         {
             "name": "cebe/markdown",
@@ -379,12 +380,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "136e508ca0a7af37907a4b62ef339ba642907ae8"
+                "reference": "6b8da53205fd8b934b12a84f4418c6abb5d4714f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/136e508ca0a7af37907a4b62ef339ba642907ae8",
-                "reference": "136e508ca0a7af37907a4b62ef339ba642907ae8",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/6b8da53205fd8b934b12a84f4418c6abb5d4714f",
+                "reference": "6b8da53205fd8b934b12a84f4418c6abb5d4714f",
                 "shasum": ""
             },
             "require": {
@@ -459,7 +460,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2015-03-23 18:08:27"
+            "time": "2015-03-27 02:57:27"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -564,16 +565,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-swiftmailer.git",
-                "reference": "cab046bddcac9cf179fbcbe48ab62aa512f088ad"
+                "reference": "8d5d9c9782ba28e6b47c65270eed6a238c781abd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-swiftmailer/zipball/cab046bddcac9cf179fbcbe48ab62aa512f088ad",
-                "reference": "cab046bddcac9cf179fbcbe48ab62aa512f088ad",
+                "url": "https://api.github.com/repos/yiisoft/yii2-swiftmailer/zipball/8d5d9c9782ba28e6b47c65270eed6a238c781abd",
+                "reference": "8d5d9c9782ba28e6b47c65270eed6a238c781abd",
                 "shasum": ""
             },
             "require": {
-                "swiftmailer/swiftmailer": "~5.4",
+                "swiftmailer/swiftmailer": "~5.0",
                 "yiisoft/yii2": "*"
             },
             "type": "yii2-extension",
@@ -606,7 +607,7 @@
                 "swiftmailer",
                 "yii2"
             ],
-            "time": "2015-03-24 11:41:29"
+            "time": "2015-03-25 12:25:47"
         }
     ],
     "packages-dev": [

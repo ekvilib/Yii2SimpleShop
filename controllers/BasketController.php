@@ -35,9 +35,14 @@ class BasketController extends Controller
 
 	public function actionIndex()
 	{
-		$model = new ContactForm();
+		$model = new ContactForm([
+            'subject' => 'Заказ с сайта'
+        ]);
 		if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
 			Yii::$app->session->setFlash('contactFormSubmitted');
+            BasketProduct::deleteAll([
+                'user_id' => Yii::$app->user->id
+            ]);
 
 			return $this->refresh();
 		}
@@ -52,16 +57,50 @@ class BasketController extends Controller
 		]);
 	}
 
-	public function actionPut($id)
-	{
-		$product = Product::findOne($id);
-		if (!$product) {
-			throw new NotFoundHttpException('product is invalid');
-		}
+    public function actionPut($id)
+    {
+        $product = Product::findOne($id);
+        if (!$product) {
+            throw new NotFoundHttpException('product is invalid');
+        }
 
-		$basketProduct = new Basket(Yii::$app->user->identity);
-		$basketProduct->addProduct($product);
+        $basketProduct = new Basket(Yii::$app->user->identity);
+        $basketProduct->addProduct($product);
 
-		return Yii::$app->response->redirect(Yii::$app->urlManager->createUrl('basket'));
-	}
+        return Yii::$app->response->redirect(Yii::$app->urlManager->createUrl('basket'));
+    }
+
+    public function actionAdd($id)
+    {
+        $product = BasketProduct::findOne($id);
+        if (!$product) {
+            throw new NotFoundHttpException('product is invalid');
+        }
+
+        $product->count++;
+        $product->save();
+
+        return Yii::$app->response->redirect(Yii::$app->urlManager->createUrl('basket'));
+    }
+
+    public function actionRemove($id)
+    {
+        $product = BasketProduct::findOne($id);
+        if (!$product) {
+            throw new NotFoundHttpException('product is invalid');
+        }
+
+        $product->count--;
+
+        if($product->count > 0)
+        {
+            $product->save();
+        }
+        else
+        {
+            $product->delete();
+        }
+
+        return Yii::$app->response->redirect(Yii::$app->urlManager->createUrl('basket'));
+    }
 }

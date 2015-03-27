@@ -43,10 +43,24 @@ class Product extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'category_id' => 'Category ID',
-            'name' => 'Name',
-            'description' => 'Description',
-            'price' => 'Price',
+            'category_id' => 'Категория',
+            'name' => 'Наименование продукта',
+            'description' => 'Описание',
+            'price' => 'Цена',
         ];
+    }
+
+    public function getAttributes()
+    {
+        return ProductAttribute::find()
+            ->where(['product_id' => $this->id])
+            ->all();
+    }
+
+    public function getCategory()
+    {
+        return Category::find()
+            ->where(['id' => $this->category_id])
+            ->one();
     }
 }

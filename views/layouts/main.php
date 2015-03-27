@@ -20,39 +20,48 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body>
+<body background="../images/46.png">>
 
 <?php $this->beginBody() ?>
     <div class="wrap">
         <?php
             NavBar::begin([
-                'brandLabel' => 'My Company',
+                'brandLabel' => 'Корзинка',
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
-                    'class' => 'navbar-inverse',
+                    'class' => 'myimage',
                 ],
             ]);
 
 	        $items = [
-		        ['label' => 'Home', 'url' => ['/site/index']],
-		        ['label' => 'About', 'url' => ['/site/about']],
-		        ['label' => 'Contact', 'url' => ['/site/contact']],
+		        ['label' => 'Главная', 'url' => ['/site/index']],
+		        ['label' => 'Контакты', 'url' => ['/site/about']],
+		        ['label' => 'Обратная связь', 'url' => ['/site/contact']],
 		        Yii::$app->user->isGuest ?
-			        ['label' => 'Login', 'url' => ['/site/login']] :
-			        ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+			        ['label' => 'Войти', 'url' => ['/site/login']] :
+			        ['label' => 'Выход (' . Yii::$app->user->identity->username . ')',
 				        'url' => ['/site/logout'],
 				        'linkOptions' => ['data-method' => 'post']],
 	        ];
 
-	        if(!Yii::$app->user->isGuest && Yii::$app->user->identity->is_admin)
-	        {
-		        $items[] = ['label' => 'Edit users', 'url' => ['/admin-user']];
-		        $items[] = ['label' => 'Edit baskets', 'url' => ['/admin-basket-product']];
-		        $items[] = ['label' => 'Edit categories', 'url' => ['/admin-category']];
-		        $items[] = ['label' => 'Edit product', 'url' => ['/admin-product']];
-		        $items[] = ['label' => 'Edit product attributes', 'url' => ['/admin-product-attribute']];
-		        $items[] = ['label' => 'Edit product attributes types', 'url' => ['/admin-product-attribute-type']];
-	        }
+            if(!Yii::$app->user->isGuest && Yii::$app->user->identity->is_admin)
+            {
+                $items[] = ['label' => 'Редактироваль пользователей', 'url' => ['/admin-user']];
+                $items[] = ['label' => 'Редактировать карзины', 'url' => ['/admin-basket-product']];
+                $items[] = ['label' => 'Редактировать категории', 'url' => ['/admin-category']];
+                $items[] = ['label' => 'Редактировать продукты', 'url' => ['/admin-product']];
+                $items[] = ['label' => 'Редактировать атрибуты продуктов', 'url' => ['/admin-product-attribute']];
+                $items[] = ['label' => 'Редактировать типы атрибутов', 'url' => ['/admin-product-attribute-type']];
+            }
+
+            if(!Yii::$app->user->isGuest)
+            {
+                $items[] = ['label' => 'Корзина', 'url' => ['/basket']];
+            }
+        else
+        {
+            $items[] = ['label' => 'Регистрация', 'url' => ['/site/register']];
+        }
 
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav'],
@@ -62,7 +71,12 @@ AppAsset::register($this);
         ?>
 
         <div class="container">
+
             <?= Breadcrumbs::widget([
+                'homeLink' => [
+                    'url' => '/',
+                    'label' => 'Главная страница',
+                ],
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
             ]) ?>
             <?= $content ?>
@@ -71,8 +85,8 @@ AppAsset::register($this);
 
     <footer class="footer">
         <div class="container">
-            <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-            <p class="pull-right"><?= Yii::powered() ?></p>
+            <p class="pull-left">&copy; Корзинка <?= date('Y') ?></p>
+            <p class="pull-right"><?= 'Made in china' ?></p>
         </div>
     </footer>
 

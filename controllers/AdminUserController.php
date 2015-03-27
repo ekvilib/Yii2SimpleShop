@@ -32,7 +32,7 @@ class AdminUserController extends Controller
 		parent::beforeAction($action);
 
 		if (Yii::$app->user->isGuest || !Yii::$app->user->identity->is_admin) {
-			throw new ForbiddenHttpException('You are not admin');
+			throw new ForbiddenHttpException('Вы не админ');
 		}
 
 		return true;
@@ -138,7 +138,7 @@ class AdminUserController extends Controller
 			return $model;
 		}
 		else {
-			throw new NotFoundHttpException('The requested page does not exist.');
+			throw new NotFoundHttpException('Траница ненайдена..');
 		}
 	}
 }

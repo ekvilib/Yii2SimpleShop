@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\ProductAttributeTypeSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Product Attribute Types';
+$this->title = 'Типы атрибутов продукта';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-attribute-type-index">
@@ -16,10 +16,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Product Attribute Type', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить тип атрибутов продукта', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
+        'layout'=>"{items}{pager}",
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [

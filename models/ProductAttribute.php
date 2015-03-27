@@ -41,14 +41,24 @@ class ProductAttribute extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'product_id' => 'Product ID',
-            'type_id' => 'Type ID',
-            'value' => 'Value',
+            'product_id' => 'Наименование продукта',
+            'type_id' => 'Тип',
+            'value' => 'Значение',
         ];
     }
 
-	public function getType()
-	{
-		return ProductAttributeType::findOne($this->type_id);
-	}
+    public function getType()
+    {
+        return ProductAttributeType::findOne($this->type_id);
+    }
+
+    public function getProduct()
+    {
+        return Product::findOne($this->product_id);
+    }
+
+    public function getName()
+    {
+        return $this->type->name;
+    }
 }

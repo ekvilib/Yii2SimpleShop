@@ -10,6 +10,10 @@ body {
     padding: 0 0 60px;
 }
 
+.myimage{
+    background: url("../images/46.png") repeat;
+}
+
 .wrap > .container {
     padding: 70px 15px 20px;
 }

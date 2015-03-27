@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Category;
 use app\models\ContactForm;
 use app\models\LoginForm;
+use app\models\RegisterForm;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -53,22 +54,39 @@ class SiteController extends Controller
 		]);
 	}
 
-	public function actionLogin()
-	{
-		if (!\Yii::$app->user->isGuest) {
-			return $this->goHome();
-		}
+    public function actionLogin()
+    {
+        if (!\Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
 
-		$model = new LoginForm();
-		if ($model->load(Yii::$app->request->post()) && $model->login()) {
-			return $this->goBack();
-		}
-		else {
-			return $this->render('login', [
-				'model' => $model,
-			]);
-		}
-	}
+        $model = new LoginForm();
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            return $this->goBack();
+        }
+        else {
+            return $this->render('login', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    public function actionRegister()
+    {
+        if (!\Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new RegisterForm();
+        if ($model->load(Yii::$app->request->post()) && $model->register()) {
+            return $this->goBack();
+        }
+        else {
+            return $this->render('register', [
+                'model' => $model,
+            ]);
+        }
+    }
 
 	public function actionLogout()
 	{

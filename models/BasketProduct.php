@@ -60,10 +60,10 @@ class BasketProduct extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'user_id' => 'User ID',
-            'product_id' => 'Product ID',
-	        'count' => 'Count',
-	        'time_create' => 'Time create',
+            'user_id' => 'Имя пользователя',
+            'product_id' => 'Продукт',
+	        'count' => 'Количество',
+	        'time_create' => 'Время покупки',
         ];
     }
 
@@ -71,4 +71,20 @@ class BasketProduct extends \yii\db\ActiveRecord
 	{
 		return Product::findOne($this->product_id);
 	}
+
+    public function getUserName()
+    {
+      /*  return User::findOne($this->user_id)->username;  и то что ниже равны нахуй!!!!!!*/
+        return User::find()
+            ->where([
+                'id' => $this->user_id
+            ])->one()->username;
+    }
+
+    public function ololo()
+    {
+        return Product::findOne($this->product_id)->name;
+    }
+
+
 }

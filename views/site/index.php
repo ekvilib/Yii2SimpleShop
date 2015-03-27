@@ -6,7 +6,7 @@ $this->title = 'My Yii Application';
 
     <div class="jumbotron">
 	    <div style="height: 200px;">
-		    <h1>Пыщпыщ!</h1>
+		    <h1>Интернет-магазин "КОРЗИНКА"!</h1>
 	    </div>
 
         <p class="lead">Добро пожаловать в интернет-магазин!</p>
@@ -20,7 +20,7 @@ $this->title = 'My Yii Application';
 
 					<?php foreach($category->subcategories as $subcategory): ?>
 						<div class="">
-							<a href="<?php echo Yii::$app->urlManager->createUrl(['category', 'id' => $category->id]); ?>"><?php echo $category->name; ?></a>
+							<a href="<?php echo Yii::$app->urlManager->createUrl(['category', 'id' => $subcategory->id]); ?>"><?php echo $subcategory->name; ?></a>
 						</div>
 					<?php endforeach; ?>
 

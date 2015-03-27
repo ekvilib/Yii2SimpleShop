@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Хост:                         127.0.0.1
--- Версия сервера:               5.5.37-MariaDB-log - mariadb.org binary distribution
+-- Версия сервера:               5.5.41-log - MySQL Community Server (GPL)
 -- ОС Сервера:                   Win32
 -- HeidiSQL Версия:              9.1.0.4867
 -- --------------------------------------------------------
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   `category_id` int(11) NOT NULL DEFAULT '0',
   `name` varchar(128) NOT NULL DEFAULT '0',
   `description` text,
-  `price` decimal(10,4) NOT NULL DEFAULT '0.0000',
+  `price` decimal(10,2) NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Users';
+$this->title = 'Пользователи';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
@@ -16,10 +16,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать пользователя', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
+        'layout'=>"{items}{pager}",
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [

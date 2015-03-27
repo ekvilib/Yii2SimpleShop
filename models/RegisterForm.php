@@ -8,7 +8,7 @@ use yii\base\Model;
 /**
  * LoginForm is the model behind the login form.
  */
-class LoginForm extends Model
+class RegisterForm extends Model
 {
     public $username;
     public $password;
@@ -27,10 +27,9 @@ class LoginForm extends Model
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
-            ['password', 'validatePassword'],
+            ['password', 'safe'],
         ];
     }
-
     /**
      * @inheritdoc
      */
@@ -42,49 +41,21 @@ class LoginForm extends Model
             'rememberMe' => 'Запомнить на сайте',
         ];
     }
-
-    /**
-     * Validates the password.
-     * This method serves as the inline validation for password.
-     *
-     * @param string $attribute the attribute currently being validated
-     * @param array $params the additional name-value pairs given in the rule
-     */
-    public function validatePassword($attribute, $params)
-    {
-        if (!$this->hasErrors()) {
-            $user = $this->getUser();
-
-            if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Неправильное имя пользователя или пароль.');
-            }
-        }
-    }
-
     /**
      * Logs in a user using the provided username and password.
      * @return boolean whether the user is logged in successfully
      */
-    public function login()
+    public function register()
     {
         if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
+            $user = new User();
+            $user->username = $this->username;
+            $user->password = $this->password;
+            $user->save();
+
+            return Yii::$app->user->login($user, $this->rememberMe ? 3600*24*30 : 0);
         } else {
             return false;
         }
-    }
-
-    /**
-     * Finds user by [[username]]
-     *
-     * @return User|null
-     */
-    public function getUser()
-    {
-        if ($this->_user === false) {
-            $this->_user = User::findByUsername($this->username);
-        }
-
-        return $this->_user;
     }
 }

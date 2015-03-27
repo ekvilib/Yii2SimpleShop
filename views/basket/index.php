@@ -3,20 +3,22 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
-$this->title = 'Category';
+$this->title = 'Корзина';
 ?>
 <div class="category-index">
 
-	<h1>Basket</h1>
+	<h1>Корзина</h1>
 
 	<?php foreach($basketProducts as $basketProduct): ?>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="alert alert-success">
 					<h2><?php echo $basketProduct->product->name; ?></h2>
-					<div class="badge badge-inverse">Стоимость: <?php echo $basketProduct->product->price; ?></div>
+					<div class="badge badge-inverse">Стоимость итого: <?php echo $basketProduct->product->price * $basketProduct->count; ?></div>
 					<?php echo $basketProduct->product->description; ?>
 					<div>Количество: <?php echo $basketProduct->count; ?></div>
+                    <?= Html::a('Добавить', ['basket/add', 'id' => $basketProduct->id], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('Убрать', ['basket/remove', 'id' => $basketProduct->id], ['class' => 'btn btn-danger']) ?>
 				</div>
 			</div>
 		</div>
@@ -55,7 +57,7 @@ $this->title = 'Category';
 				<?= $form->field($model, 'email') ?>
 				<?= $form->field($model, 'body')->textArea(['rows' => 6]) ?>
 				<div class="form-group">
-					<?= Html::submitButton('Submit', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
+					<?= Html::submitButton('Отправить', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
 				</div>
 				<?php ActiveForm::end(); ?>
 			</div>
